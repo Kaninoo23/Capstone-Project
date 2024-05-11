@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title> 
+    <!-- Linking your CSS file here -->
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="styles/header-styles.css">
+    <link rel="stylesheet" href="styles/shopping-cart-styles.css"> 
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="Images\logo.png" alt="logo" class="logo">
+        </div>
+        <div class="center-text">
+            <h1>Shopping Cart</h1>
+        </div>
+        <nav class="button-container">
+            <button class="common-button" onclick="window.location.href='home.html'">Home</button>
+            <button class="common-button" onclick="window.location.href='products.html'">Products</button>
+            <button class="common-button">About</button>
+            <button class="common-button">Contact</button>
+            <!-- Add the cart count element here -->
+            <span class="cart-count"></span>
+        </nav>
+    </header>
+
+    <main class="cart-container"> <!-- New parent container for centering -->
+        <div class="cart-items"> <!-- This div contains the cart items -->
+            <!-- Cart items will be dynamically added here by JavaScript -->
+        </div>
+        <div class="cart-summary">
+            <div>
+                <span>Quantity:</span>
+                <span class="cart-quantity">0</span>
+            </div>
+            <div>
+                <span>Tax:</span>
+                <span class="cart-tax">$0.00</span>
+            </div>
+            <div>
+                <span>Shipping:</span>
+                <span class="cart-shipping">$0.00</span>
+            </div>
+            <div>
+                <span>Total:</span>
+                <span class="cart-total">$0.00</span>
+            </div>
+            <button class="checkout-button">Checkout</button>
+        </div>
+    </main>
+    <script src="shopping-cart.js"></script>
+</body>
+</html>

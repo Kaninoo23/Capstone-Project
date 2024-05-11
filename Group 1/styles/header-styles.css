@@ -1,0 +1,95 @@
+
+.header {
+    display: flex;
+    justify-content: space-between; /* Centering the flex items horizontally */
+    align-items: center;  /* Centering the flex items vertically */
+    background-color: #333;
+    padding: 0 30px;
+    
+    
+   }
+.logo-container {
+    width: 400px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    }
+.logo {
+        max-width: 100%;
+        max-height: 100%;
+    }
+.center-text {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #149CEA;
+  animation: slideIn 1s ease-in-out forwards;
+  }
+  @keyframes slideIn {
+    from{
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to{
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }    
+.button-container {
+    display: flex;
+    margin-top: 20px;
+    gap: 10px;
+    justify-content: flex-start; 
+  }
+.header button {
+    width: 10em;
+    position: relative;
+    height: 3.5em;
+    border: 3px ridge #149CEA;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    transition: 1s;
+    border-radius: 0.3em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .header button::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+    background-color: #333;
+    transition: 0.5s;
+    transform-origin: center;
+  }
+  
+  .header button::before {
+    content: "";
+    transform-origin: center;
+    position: absolute;
+    top: 80%;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+    background-color: #333;
+    transition: 0.5s;
+  }
+  
+  .header button:hover::before, button:hover::after {
+    transform: scale(0)
+  }
+  
+  .header button:hover {
+    box-shadow: inset 0px 0px 25px #1479EA;
+  }
+  .cart-count {
+    color: red;
+}
+  
+   
