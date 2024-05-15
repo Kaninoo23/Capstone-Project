@@ -22,14 +22,14 @@
             <button class="common-button" onclick="window.location.href='products.html'">Products</button>
             <button class="common-button">About</button>
             <button class="common-button">Contact</button>
-            <!-- Add the cart count element here -->
+            <!-- Added the cart count element here -->
             <span class="cart-count"></span>
         </nav>
     </header>
 
     <main class="cart-container"> <!-- New parent container for centering -->
-        <div class="cart-items"> <!-- This div contains the cart items -->
-            <!-- Cart items will be dynamically added here by JavaScript -->
+        <div class="cart-items">
+            <!-- Cart items will be dynamically added here -->
         </div>
         <div class="cart-summary">
             <div>
@@ -44,9 +44,13 @@
                 <span>Shipping:</span>
                 <span class="cart-shipping">$0.00</span>
             </div>
-            <div>
+           <div>
                 <span>Total:</span>
                 <span class="cart-total">$0.00</span>
+            </div>
+            <div>
+                <span>Subtotal:</span>
+                <span class="cart-subtotal">$0.00</span>
             </div>
             <button class="checkout-button">Checkout</button>
         </div>

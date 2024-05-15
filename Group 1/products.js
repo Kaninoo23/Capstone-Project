@@ -16,12 +16,13 @@ function saveCartToStorage() {
     sessionStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
 }
 // Function to add an item to the shopping cart
-function addToCart(productName, productPrice, productImage) {
+function addToCart(productName, productPrice, productImage,subtotal) {
     const quantity = 1; // You can set the initial quantity to 1 or let users specify it
     const cartItem = {
         name: productName,
         price: productPrice,
         quantity: quantity,
+        subtotal: subtotal,
         imageName: productImage
     };
     shoppingCart.push(cartItem); // Add the item to the shopping cart
@@ -47,7 +48,7 @@ function displayShoppingCart() {
             itemImageElement.alt = item.name;
             cartItemElement.appendChild(itemImageElement);
 
-            // Create and append other elements like name, price, and quantity
+            // Create and append other elements like name, price, quantity, and subtotal
             const itemNameElement = document.createElement('span');
             itemNameElement.textContent = item.name;
         
@@ -56,10 +57,15 @@ function displayShoppingCart() {
         
             const itemQuantityElement = document.createElement('span');
             itemQuantityElement.textContent = `Quantity: ${item.quantity}`;
+
+            const itemSubtotalElement = document.createElement('span');
+            const subtotal = item.price * item.quantity;
+            itemSubtotalElement.textContent = `Subtotal: $${subtotal.toFixed(2)}`; // Update subtotal here
         
             cartItemElement.appendChild(itemNameElement);
             cartItemElement.appendChild(itemPriceElement);
             cartItemElement.appendChild(itemQuantityElement);
+            cartItemElement.appendChild(itemSubtotalElement);
             cartItemsContainer.appendChild(cartItemElement);
         });
 
@@ -67,8 +73,9 @@ function displayShoppingCart() {
         updateCartDetails();
     }
 }
+
  // Add event listeners to all Add to Cart buttons when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', function() {
+ document.addEventListener('DOMContentLoaded', function() {
     const addToCartButtons = document.querySelectorAll('.add-to-cart-button');
     addToCartButtons.forEach(button => {
         button.addEventListener('click', function(event) {
@@ -92,15 +99,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 productName = "Unknown Product";
             }
 
+            // Define productPrice after determining productName
             const productPrice = parseFloat(productItem.querySelector('.price').innerText.replace('$', ''));
             const productImage = productItem.querySelector('img').getAttribute('src');
-            addToCart(productName, productPrice, productImage);
+
+            // Calculate subtotal after productPrice is defined
+            const quantity = 1; // You can set the initial quantity to 1 or let users specify it
+            const subtotal = productPrice * quantity;
+
+            addToCart(productName, productPrice, productImage, subtotal);
         });
     });
 
     // Check for saved shopping cart data when the page loads
     checkForSavedCart();
 });
+
  
 // Function to check for shopping cart data in sessionStorage when the page loads
 function checkForSavedCart() {

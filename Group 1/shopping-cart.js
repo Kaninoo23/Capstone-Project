@@ -12,15 +12,23 @@ let shoppingCart = []; // Global shopping cart array to store cart items
 function displayShoppingCart() {
     if (window.location.pathname.includes('shopping-cart.html')) {
         const cartItemsContainer = document.querySelector('.cart-items');
-        console.log (cartItemsContainer)
         // Clear previous cart items
         cartItemsContainer.innerHTML = '';
 
-        // Iterate through each item in the shopping cart and create HTML elements to display them
+        // Create a map to group items by name
+        const groupedItems = {};
         shoppingCart.forEach(item => {
+            if (!groupedItems[item.name]) {
+                groupedItems[item.name] = { ...item, quantity: 0 };
+            }
+            groupedItems[item.name].quantity += item.quantity;
+        });
+
+        // Iterate through grouped items and create HTML elements to display them
+        Object.values(groupedItems).forEach(item => {
             const cartItemElement = document.createElement('div');
             cartItemElement.classList.add('cart-item');
-        
+
             // Create and append image element
             const itemImageElement = document.createElement('img');
             itemImageElement.src = 'Images/' + imageNames[item.name];
@@ -30,16 +38,21 @@ function displayShoppingCart() {
             // Create and append other elements like name, price, and quantity
             const itemNameElement = document.createElement('span');
             itemNameElement.textContent = item.name;
-        
+
             const itemPriceElement = document.createElement('span');
             itemPriceElement.textContent = `$${item.price}`;
-        
+
             const itemQuantityElement = document.createElement('span');
             itemQuantityElement.textContent = `Quantity: ${item.quantity}`;
-        
+
+            const itemSubtotalElement = document.createElement('span');
+            const subtotal = item.price * item.quantity;
+            itemSubtotalElement.textContent = `Subtotal: $${subtotal.toFixed(2)}`;
+
             cartItemElement.appendChild(itemNameElement);
             cartItemElement.appendChild(itemPriceElement);
             cartItemElement.appendChild(itemQuantityElement);
+            cartItemElement.appendChild(itemSubtotalElement);
             cartItemsContainer.appendChild(cartItemElement);
         });
 
@@ -48,8 +61,10 @@ function displayShoppingCart() {
     }
 }
 
+
 document.addEventListener('DOMContentLoaded', function() {
     // Call displayShoppingCart() to initially display the items when the page loads.
+    checkForSavedCart();
     displayShoppingCart();
 });
 
@@ -68,15 +83,29 @@ function updateCartDetails() {
     const shipping = calculateShipping();
     cartShippingElement.textContent = `$${shipping.toFixed(2)}`;
 
+    // Calculate subtotal
+    const subtotal = calculateSubtotal();
+    const cartSubtotalElement = document.querySelector('.cart-subtotal');
+    if (cartSubtotalElement) {
+        cartSubtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+    } else {
+        console.error("Element with class 'cart-subtotal' not found.");
+    }
     const cartTotalElement = document.querySelector('.cart-total');
     const total = calculateTotal();
     cartTotalElement.textContent = `$${total.toFixed(2)}`;
 }
 
+// Function to calculate subtotal
+function calculateSubtotal() {
+    return shoppingCart.reduce((total, item) => total + item.subtotal, 0);
+}
+
+
 // Function to calculate tax
 function calculateTax() {
     // Implement your tax calculation logic here
-    return 0; // Placeholder value, replace it with actual calculation
+    return 2; // Placeholder value, replace it with actual calculation
 }
 
 // Function to calculate shipping
@@ -103,5 +132,3 @@ function checkForSavedCart() {
     }
 }
 
-// Call the function to check for saved shopping cart data when the page loads
-document.addEventListener('DOMContentLoaded', checkForSavedCart);
