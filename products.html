@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title> 
+    <!-- Linked CSS files -->
+    <link rel="stylesheet" href="styles/header-styles.css">
+    <link rel="stylesheet" href="styles/product-styles.css">
+    <link rel="icon" href="Images/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="Images/logo.png" alt="logo" class="logo">
+        </div>
+        <div class="center-text">
+            <h1>Products</h1>
+        </div>
+        <nav class="button-container" id="buttonContainer">
+            <!-- Buttons will be dynamically added here by JavaScript -->
+            
+        </nav>
+    </header>
+
+    <main class="products-main">
+        <div class="product-container">
+            <div class="product-card">
+                <img src="Images/Logitech G PRO X.png" alt="Keyboard" class="product-image">
+                <div class="product-details">
+                    <span class="product-name">Logitech G PRO X</span>
+                    <span class="price">$50</span>
+                    <div class="cart-controls">
+                        <input type="number" id="quantity-input1" name="quantity" value="1" min="1" max="10" class="quantity-input">
+                        <button class="add-to-cart-button">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="Images/Logitech G213 Prodigy.png" alt="Keyboard" class="product-image">
+                <div class="product-details">
+                    <span class="product-name">Logitech G213 Prodigy</span>
+                    <span class="price">$60</span>
+                    <div class="cart-controls">
+                        <input type="number" id="quantity-input2" name="quantity" value="1" min="1" max="10" class="quantity-input">
+                        <button class="add-to-cart-button">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="Images/Logitech G513 Carbon.png" alt="Keyboard" class="product-image">
+                <div class="product-details">
+                    <span class="product-name">Logitech G513 Carbon</span>
+                    <span class="price">$80</span>
+                    <div class="cart-controls">
+                        <input type="number" id="quantity-input3" name="quantity" value="1" min="1" max="10" class="quantity-input">
+                        <button class="add-to-cart-button">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="Images/Logitech G710+.png" alt="Keyboard" class="product-image">
+                <div class="product-details">
+                    <span class="product-name">Logitech G710+</span>
+                    <span class="price">$40</span>
+                    <div class="cart-controls">
+                        <input type="number" id="quantity-input4" name="quantity" value="1" min="1" max="10" class="quantity-input">
+                        <button class="add-to-cart-button">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <span class="cart-count"></span><!-- Added the cart count element here -->
+    <script src="products.js"></script>
+</body>
+</html>

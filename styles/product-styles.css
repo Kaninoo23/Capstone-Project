@@ -1,0 +1,121 @@
+.products-main {
+    background-image: url('../Images/Background.jpg');
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-position: center;
+    width: 100%;
+    min-height: 100vh; /* Adjust height as needed */
+    padding: 20px; /* Add padding for spacing */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Adjust spacing between cards */
+    align-items: flex-start; /* Start align items */
+    max-width: 1200px; /* Adjust as needed */
+    width: 100%; /* Ensure full width */
+}
+
+.product-card {
+    width: 200px; 
+    display: block;
+    margin: 0 auto; 
+    background-color: rgba(0, 0, 0, 0); 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    padding: 20px; 
+    box-sizing: border-box; 
+
+    /* Center align text in the card */
+    text-align: center;
+
+    border: 3px ridge #149CEA;
+}
+
+.product-card .product-image {
+    width: 100%; /* Ensure image takes full width of its container */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Rounded corners for the image */
+}
+
+.product-card .product-details {
+    margin-top: 10px; /* Adjust spacing between image and details */
+}
+
+.price {
+    display: block;
+    margin-top: 10px; /* Adjust spacing */
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    padding: 5px;
+}
+
+.cart-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.quantity-input {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.add-to-cart-button {
+    width: 10em;
+    position: relative;
+    height: 3.5em;
+    border: 3px ridge #149CEA;
+    outline: none;
+    background-color: transparent;
+    color: white; /* Ensure text color is explicitly set */
+    transition: 1s;
+    border-radius: 0.3em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block; /* Ensure button behaves like a block element */
+}
+
+.add-to-cart-button::after,
+.add-to-cart-button::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+    background-color: transparent;
+    transition: 0.5s;
+    transform-origin: center;
+}
+
+.add-to-cart-button::before {
+    content: "";
+    transform-origin: center;
+    position: absolute;
+    top: 80%;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+    background-color: transparent;
+    transition: 0.5s;
+}
+
+.add-to-cart-button:hover::before,
+.add-to-cart-button:hover::after {
+    transform: scale(0);
+}
+
+.add-to-cart-button:hover {
+    box-shadow: inset 0px 0px 25px #1479EA;
+    color: white; /* Ensure text color remains white on hover */
+}
+
+
+

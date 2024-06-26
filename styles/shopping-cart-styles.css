@@ -1,0 +1,146 @@
+/* Existing styles for cart items and container */
+
+.cart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.cart-items {
+    max-width: 600px; /* Adjust the max width of the cart items container */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item {
+    display: flex; /* Change display to flex */
+    flex-direction: column; /* Change flex direction to column */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 10px;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-item img {
+    max-width: 100px; /* Adjust max-width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 10px;
+}
+
+.cart-item:last-child {
+    color: #888;
+}
+
+.cart-item span {
+    display: block;
+    font-size: 16px;
+}
+
+.cart-item span:first-child {
+    font-weight: bold;
+}
+
+.cart-item span:last-child {
+    color: #888;
+}
+
+/* Styling for the checkout button remains unchanged */
+.checkout-button {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #0056b3;
+    color: #fff;
+    border: 3px ridge #149CEA; /* Use ridge border style */
+    outline: none;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative; /* Ensure positioning context for pseudo-elements */
+    overflow: hidden; /* Ensure pseudo-elements stay within button bounds */
+    z-index: 1; /* Ensure button content is above pseudo-elements */
+}
+
+.checkout-button::after,
+.checkout-button::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+    background-color: transparent; /* Set pseudo-element background to transparent */
+    transition: transform 0.5s;
+    transform-origin: center;
+}
+
+.checkout-button::before {
+    top: 100%;
+    transform-origin: bottom center;
+}
+
+.checkout-button:hover::before,
+.checkout-button:hover::after {
+    transform: scaleY(0); /* Scale to hide the pseudo-elements */
+}
+
+.checkout-button:hover {
+    background-color: #0056b3;
+    color: white;
+    box-shadow: inset 0px 0px 25px #1479EA; /* Optional: add inset shadow on hover */
+}
+
+.remove-from-cart-button {
+    display: inline-block;
+    padding: 8px 16px; /* Adjust padding for smaller size */
+    background-color: #dc3545; /* Red background color */
+    color: #fff; /* White text color */
+    border: 2px ridge #dc3545; /* Ridge border style matching the background color */
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    font-size: 12px; /* Adjust font size */
+    margin-top: 10px;
+    transform: translateY(10px); /* Initially move button down */
+}
+
+.remove-from-cart-button::before,
+.remove-from-cart-button::after {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 3%;
+    width: 94%;
+    height: 32%;
+    background-color: transparent;
+    transition: transform 0.5s;
+    transform-origin: center;
+}
+
+.remove-from-cart-button::before {
+    top: 100%;
+    transform-origin: bottom center;
+}
+
+.remove-from-cart-button:hover::before,
+.remove-from-cart-button:hover::after {
+    transform: scaleY(0);
+}
+
+.remove-from-cart-button:hover {
+    background-color: #c82333; /* Darker red on hover */
+    box-shadow: inset 0px 0px 15px #c82333; /* Optional: add inset shadow on hover */
+}
+
+.remove-from-cart-button.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+

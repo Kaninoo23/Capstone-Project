@@ -2,15 +2,16 @@
   "name": "capstone-project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.3.3",
+    "express": "^4.19.2",
     "mysql": "^2.18.1"
   }
 }

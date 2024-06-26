@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Out</title> 
+    <!-- Linking my CSS file here -->
+    <link rel="stylesheet" href="styles/header-styles.css">
+    <link rel="icon" href="Images\favicon.png" type="image/x-icon"> 
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="Images\logo.png" alt="logo" class="logo">
+        </div>
+        <div class="center-text">
+            <h1>Check Out</h1>
+        </div>
+        <nav class="button-container">
+            <button class="common-button" onclick="window.location.href='home.html'">Home</button>
+            <button class="common-button" onclick="window.location.href='products.html'">Products</button>
+            <button class="common-button">About</button>
+            <button class="common-button">Contact</button>
+            <button class="common-button" onclick="window.location.href='shopping-cart.html'">shopping-cart</button>
+            <!-- Add the cart count element here -->
+            <span class="cart-count"></span>
+        </nav>
+    </header>
+
+        <main class="checkout-main">
+            <form action="process_checkout.php" method="POST">
+                <!-- Shipping Address -->
+                <fieldset>
+                    <legend>Shipping Address</legend>
+                    <input type="text" name="shipping_name" placeholder="Full Name" required>
+                    <input type="text" name="shipping_address" placeholder="Address" required>
+                    <input type="text" name="shipping_city" placeholder="City" required>
+                    <input type="text" name="shipping_state" placeholder="State/Province" required>
+                    <input type="text" name="shipping_zip" placeholder="ZIP/Postal Code" required>
+                    <input type="text" name="shipping_country" placeholder="Country" required>
+                </fieldset>
+                
+                <!-- Billing Address -->
+                <fieldset>
+                    <legend>Billing Address</legend>
+                    <input type="checkbox" id="same_billing_address">
+                    <label for="same_billing_address">Same as Shipping Address</label>
+                    <input type="text" id="billing_name" name="billing_name" placeholder="Full Name" required>
+                    <input type="text" id="billing_address" name="billing_address" placeholder="Address" required>
+                    <input type="text" id="billing_city" name="billing_city" placeholder="City" required>
+                    <input type="text" id="billing_state" name="billing_state" placeholder="State/Province" required>
+                    <input type="text" id="billing_zip" name="billing_zip" placeholder="ZIP/Postal Code" required>
+                    <input type="text" id="billing_country" name="billing_country" placeholder="Country" required>
+
+                </fieldset>
+                
+                <!-- Contact Information -->
+                <fieldset>
+                    <legend>Contact Information</legend>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="tel" name="phone" placeholder="Phone" required>
+                </fieldset>
+                
+                <!-- Payment Information -->
+                <fieldset>
+                    <legend>Payment Information</legend>
+                    <!-- Payment form fields (e.g., credit card number, expiration date, CVV) -->
+                </fieldset>
+            
+                <!-- Order Summary -->
+                <fieldset>
+                    <legend>Order Summary</legend>
+                    <!-- Summary of items, total cost, etc. -->
+                </fieldset>
+            
+                <!-- Submit Button -->
+                <button type="submit">Place Order</button>
+            </form>
+            
+         <script src="checkout.js"></script>
+          <script src="home.js"></script>
+            
+            
+        </main>
+ <script src="checkout.js"></script>
+</body>
+    </html>
