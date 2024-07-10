@@ -1,0 +1,116 @@
+/* reset.css */
+html, body, header, nav, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* header-styles.css */
+body {
+  font-family: Arial, sans-serif; /* Example font family */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 0 30px;
+}
+
+.logo-container {
+  width: 200px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.common-link {
+  color: white;
+  text-decoration: none;
+  margin-left: 10px; /* Adjust margin as needed */
+  font-size: 18px; /* Increase font size */
+  padding: 8px 12px; /* Adjust padding to increase button size */
+}
+
+.center-text {
+  text-align: center;
+  color: #149CEA;
+  animation: slideIn 1s ease-in-out forwards;
+}
+
+.button-container {
+  display: flex;
+  margin-top: 20px;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.header button {
+  /* Apply styles specifically to buttons inside the header */
+  width: 10em;
+  position: relative;
+  height: 3.5em;
+  border: 3px ridge #149CEA;
+  outline: none;
+  background-color: transparent;
+  color: white;
+  transition: 1s;
+  border-radius: 0.3em;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.header button::after,
+.header button::before {
+  content: "";
+  position: absolute;
+  width: 95%;
+  height: 40%;
+  background-color: #333;
+  transition: 0.5s;
+}
+
+.header button::after {
+  top: -10px;
+  left: 3%;
+  transform-origin: center;
+}
+
+.header button::before {
+  top: 80%;
+  left: 3%;
+  transform-origin: center;
+}
+
+.header button:hover::before,
+.header button:hover::after {
+  transform: scale(0);
+}
+
+.header button:hover {
+  box-shadow: inset 0px 0px 25px #1479EA;
+  color: white;
+}
+
+.cart-count {
+  color: red;
+  font-size: 14px;
+  position: absolute;
+  top: 25px; /* Adjust top position to align it closer to the button */
+  right: 100px; /* Adjust right position to align it closer to the button */
+  background-color: white;
+  border: 1px solid red;
+  padding: 3px 6px;
+  border-radius: 50%;
+  visibility: hidden; /* Hide initially */
+}

@@ -1,0 +1,151 @@
+/* header-styles.css */
+
+/* Reset default body margin and set font family */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+/* Header styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 0 30px;
+    position: relative;
+}
+
+/* Logo container */
+.logo-container {
+    width: 200px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+/* Logo image */
+.logo {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Centered text style */
+.center-text {
+    text-align: center;
+    color: #149CEA;
+    animation: slideIn 1s ease-in-out forwards;
+}
+
+/* Container for buttons */
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+/* Common button styles */
+.common-button {
+    width: 10em;
+    position: relative;
+    height: 3.5em;
+    border: 3px ridge #149CEA;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    transition: 1s;
+    border-radius: 0.3em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Pseudo-element for button top */
+.header .common-button::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+    background-color: #333;
+    transition: 0.5s;
+    transform-origin: center;
+}
+
+/* Pseudo-element for button bottom */
+.header .common-button::before {
+    content: "";
+    transform-origin: center;
+    position: absolute;
+    top: 80%;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+    background-color: #333;
+    transition: 0.5s;
+}
+
+/* Hover effect for pseudo-elements */
+.header .common-button:hover::before,
+.header .common-button:hover::after {
+    transform: scale(0);
+}
+
+/* Hover effect for button */
+.header .common-button:hover {
+    box-shadow: inset 0px 0px 25px #1479EA;
+    color: white;
+}
+
+/* Container styles */
+.container {
+    width: 80%;
+    margin: 50px auto;
+    text-align: center;
+}
+
+/* Form styles */
+.container form {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* Label styles */
+.container form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Input styles */
+.container form input[type="text"],
+.container form input[type="email"],
+.container form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Submit button styles */
+.container form button[type="submit"] {
+    background-color: #149CEA;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Hover effect for submit button */
+.container form button[type="submit"]:hover {
+    background-color: #0e80b7;
+}

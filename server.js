@@ -1,43 +1,62 @@
 const express = require('express');
-const app = express();
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const path = require('path');
+const cors = require('cors');
 
-// Serve static files (images, styles, and scripts)
-app.use('/images', express.static(path.join(__dirname, 'Images')));
-app.use('/styles', express.static(path.join(__dirname, 'styles')));
+const app = express();
+const port = process.env.PORT || 3000;
 
-// Serve home.html
-app.get('/home.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'home.html'));
+// Middleware
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
+// MongoDB connection
+mongoose.connect('mongodb://localhost:27017/users', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+    console.log('Connected to MongoDB');
 });
 
-// Serve products.html
-app.get('/products.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'products.html'));
+const User = require('./models/Users'); // Adjust path as per your project structure
+
+const signupRouter = require('./routes/routes'); // Adjust path as per your project structure
+app.use('/signup', signupRouter);
+
+// Routes for serving HTML pages
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'home.html'));
 });
 
-// Server shopping-cart.html
-app.get('/shopping-cart.html',  (req, res) => {
-    res.sendFile(path.join(__dirname, 'shopping-cart.html'));
+app.get('/products', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'products.html'));
 });
-// Serve home.js with correct MIME type
-app.get('/home.js', (req, res) => {
-    res.set('Content-Type', 'text/javascript'); // Ensure correct MIME type
-    res.sendFile(path.join(__dirname, 'home.js'));
-});
-app.get('/products.js', (req, res) => {
-    res.set('Content-Type', 'text/javascript'); // Ensure correct MIME type
-    res.sendFile(path.join(__dirname, 'products.js'));
-});
-app.get('/shopping-cart.js', (req, res) => {
-        res.set('Content-Type', 'text/javascript'); // Ensure correct MIME type
-        res.sendFile(path.join(__dirname, 'shopping-cart.js'));
-});        
 
-// Define other routes as needed for shopping-cart, etc.
+app.get('/shopping-cart', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'shopping-cart.html'));
+});
+
+app.get('/signup', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'signup.html'));
+});
+
+app.get('/checkout', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'checkout.html'));
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Internal Server Error');
+});
 
 // Start the server
-const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
