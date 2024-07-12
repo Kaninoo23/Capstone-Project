@@ -1,34 +1,93 @@
+// home.js
+let shoppingCart = []; // Define shoppingCart globally
 document.addEventListener('DOMContentLoaded', function() {
     const buttonContainer = document.getElementById('buttonContainer');
 
-    // Check if running in Node.js environment
-    const isNode = typeof process !== 'undefined' && process.release && process.release.name === 'node';
+    // Function to fetch login status
+    function checkLoginStatus() {
+        const token = localStorage.getItem('token'); // Retrieve token from localStorage
 
-    // Clear existing content in buttonContainer to prevent duplication
-    buttonContainer.innerHTML = '';
+        if (!token) {
+            redirectToLogin();
+            return;
+        }
 
-    if (isNode) {
-        // Create <a> elements for Node.js environment
-        createNavLink('Products', '/products');
-        createNavLink('About', '#'); // Replace '#' with actual link
-        createNavLink('Contact', '#'); // Replace '#' with actual link
-        createNavLink('Shopping Cart', '/shopping-cart');
-        createNavLink('Sign Up', '/signup'); // This will only appear in Node.js environment
-    } else {
-        // Create <button> elements for local environment
-        createButton('Products', 'products.html');
-        createButton('About', '#'); // Replace '#' with actual link
-        createButton('Contact', '#'); // Replace '#' with actual link
-        createButton('Shopping Cart', 'shopping-cart.html');
+        fetch('/check-login', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            credentials: 'same-origin'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.loggedIn) {
+                // User is logged in
+                document.getElementById('userInfo').textContent = `Welcome, ${data.user.name}!`;
+                document.getElementById('logoutButton').style.display = 'inline-block';
 
-        // Append Sign Up link to logo-container only if it's not the sign-up page
-        if (!document.body.classList.contains('signup-page')) {
-            const logoContainer = document.querySelector('.logo-container');
-            const signUpLink = document.createElement('a');
-            signUpLink.textContent = 'Sign Up';
-            signUpLink.classList.add('common-link');
-            signUpLink.href = 'signup.html';
-            logoContainer.appendChild(signUpLink);
+                // Clear existing buttons/links
+                buttonContainer.innerHTML = '';
+
+                // Create navigation buttons based on environment
+                createNavigationButtons();
+
+                // Add event listener for logout button
+                const logoutButton = document.getElementById('logoutButton');
+                if (logoutButton) {
+                    logoutButton.addEventListener('click', function() {
+                        fetch('/logout', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`
+                            },
+                            credentials: 'same-origin'
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Logout failed');
+                            }
+                            localStorage.removeItem('token');
+                            redirectToLogin();
+                        })
+                        .catch(error => {
+                            console.error('Logout error:', error);
+                            // Display logout error message to user
+                        });
+                    });
+                }
+
+            } else {
+                redirectToLogin();
+            }
+        })
+        .catch(error => {
+            console.error('Error checking login status:', error);
+            redirectToLogin();
+        });
+    }
+
+    // Function to create navigation buttons based on environment
+    function createNavigationButtons() {
+        const isNode = typeof process !== 'undefined' && process.release && process.release.name === 'node';
+
+        if (isNode) {
+            createNavLink('Products', '/products');
+            createNavLink('About', '#');
+            createNavLink('Contact', '#');
+            createNavLink('Shopping Cart', '/shopping-cart');
+        } else {
+            createButton('Products', 'products.html');
+            createButton('About', '#'); // Replace '#' with actual link
+            createButton('Contact', '#'); // Replace '#' with actual link
+            createButton('Shopping Cart', 'shopping-cart.html');
         }
     }
 
@@ -52,11 +111,28 @@ document.addEventListener('DOMContentLoaded', function() {
         buttonContainer.appendChild(link);
     }
 
-    // Function to update the cart count (assuming it's still needed)
+    
+    // Function to redirect to login page
+    function redirectToLogin() {
+    console.log('Redirecting to login page...');
+    const currentLocation = window.location.pathname;
+    if (currentLocation !== '/login.html') {
+        console.log('Current location:', currentLocation);
+        window.location.href = 'login.html';
+    }
+    }
+    
+    function checkForSavedCart() {
+        const savedCart = sessionStorage.getItem('shoppingCart');
+        if (savedCart) {
+            shoppingCart = JSON.parse(savedCart);
+            updateCartCount(); // Update cart count displayed in the header
+        }
+    }
+    // Function to update the cart count displayed in the header
     function updateCartCount() {
         const cartCountElement = document.querySelector('.cart-count');
         if (cartCountElement) {
-            const shoppingCart = JSON.parse(sessionStorage.getItem('shoppingCart')) || [];
             const cartCount = shoppingCart.reduce((total, item) => total + item.quantity, 0);
             cartCountElement.textContent = cartCount;
             cartCountElement.style.visibility = cartCount > 0 ? 'visible' : 'hidden'; // Show only if cartCount > 0
@@ -66,21 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Function to save shopping cart to sessionStorage (assuming it's still needed)
-    function saveCartToStorage(shoppingCart) {
-        sessionStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
-    }
-
-    // Function to check for saved shopping cart data in sessionStorage when the page loads (assuming it's still needed)
-    function checkForSavedCart() {
-        const savedCart = sessionStorage.getItem('shoppingCart');
-        if (savedCart) {
-            const shoppingCart = JSON.parse(savedCart);
-            updateCartCount(); // Update cart count displayed in the header
-        }
-    }
-
-    // Call the function to check for saved shopping cart data when the page loads (assuming it's still needed)
+    // Call the function to check login status when the page loads
+    checkLoginStatus();
     checkForSavedCart();
-
 });

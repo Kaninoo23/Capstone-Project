@@ -1,13 +1,19 @@
+// routes.js
 const express = require('express');
 const router = express.Router();
+const { loginUser } = require('../Services/authService');
+const { verifyToken } = require('../middlewares/authMiddleware');
 const User = require('../models/Users'); // Adjust path as per your project structure
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 // Route for handling signup POST request
-router.post('/', async (req, res) => {
+router.post('/signup', async (req, res) => {
     try {
         const { name, email, password, address, city, state, zip } = req.body;
 
-        // Check if all required fields are provided
+        // Validate required fields
         if (!name || !email || !password || !address || !city || !state || !zip) {
             throw new Error('All fields are required');
         }
@@ -18,11 +24,14 @@ router.post('/', async (req, res) => {
             throw new Error('User with this email already exists');
         }
 
+        // Hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         // Create new user
         const newUser = new User({
             name,
             email,
-            password,
+            password: hashedPassword,
             address,
             city,
             state,
@@ -37,6 +46,46 @@ router.post('/', async (req, res) => {
     } catch (error) {
         console.error('Error:', error.message);
         res.status(400).json({ message: error.message || 'Error creating user' });
+    }
+});
+
+// Route for handling login POST request
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        // Find user by email
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(401).json({ error: 'Invalid credentials' });
+        }
+
+        // Generate a dynamic JWT token
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '4h' });
+        res.status(200).json({ message: 'Login successful', token });
+
+    } catch (error) {
+        console.error('Error:', error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+// Route to check login status
+router.get('/check-login', verifyToken, async (req, res) => {
+    try {
+        const userId = req.userId;
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        res.status(200).json({ loggedIn: true, user: { name: user.name, email: user.email } });
+    } catch (error) {
+        console.error('Error checking login status:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
