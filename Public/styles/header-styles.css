@@ -129,3 +129,50 @@ body {
   border-radius: 50%;
   visibility: hidden; /* Hide initially */
 }
+#logoutButton {
+  padding: 10px 20px;
+  background-color: #333; /* Match the background color of other buttons */
+  color: white;
+  border: 3px ridge #149CEA; /* Use the same border style */
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold; /* Ensure font weight matches */
+  position: relative; /* Adjust position if necessary */
+}
+
+#logoutButton::after,
+#logoutButton::before {
+  content: "";
+  position: absolute;
+  width: 95%;
+  height: 40%;
+  background-color: #333; 
+  transition: 0.5s;
+}
+
+#logoutButton::after {
+  top: -10px;
+  left: 3%;
+  transform-origin: center;
+}
+
+#logoutButton::before {
+  top: 80%;
+  left: 3%;
+  transform-origin: center;
+}
+
+#logoutButton:hover::before,
+#logoutButton:hover::after {
+  transform: scale(0);
+}
+
+#logoutButton:hover {
+  box-shadow: inset 0px 0px 25px #1479EA;
+  color: white;
+}
+
+

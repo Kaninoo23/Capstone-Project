@@ -1,7 +1,8 @@
-// home.js
-let shoppingCart = []; // Define shoppingCart globally
+// Define shoppingCart globally
+let shoppingCart = [];
+
 document.addEventListener('DOMContentLoaded', function() {
-    const buttonContainer = document.getElementById('buttonContainer');
+    console.log('DOM loaded');
 
     // Function to fetch login status
     function checkLoginStatus() {
@@ -33,36 +34,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('logoutButton').style.display = 'inline-block';
 
                 // Clear existing buttons/links
+                const buttonContainer = document.getElementById('buttonContainer');
                 buttonContainer.innerHTML = '';
 
                 // Create navigation buttons based on environment
                 createNavigationButtons();
 
-                // Add event listener for logout button
+                // Event listener for logout button
                 const logoutButton = document.getElementById('logoutButton');
-                if (logoutButton) {
-                    logoutButton.addEventListener('click', function() {
-                        fetch('/logout', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${token}`
-                            },
-                            credentials: 'same-origin'
-                        })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Logout failed');
-                            }
-                            localStorage.removeItem('token');
-                            redirectToLogin();
-                        })
-                        .catch(error => {
-                            console.error('Logout error:', error);
-                            // Display logout error message to user
-                        });
+                logoutButton.addEventListener('click', function() {
+                    // Logout logic
+                    fetch('/logout', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        credentials: 'same-origin'
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Logout failed');
+                        }
+                        localStorage.removeItem('token');
+                        redirectToLogin();
+                    })
+                    .catch(error => {
+                        console.error('Logout error:', error);
+                        // Handle logout error
                     });
-                }
+                });
 
             } else {
                 redirectToLogin();
@@ -77,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to create navigation buttons based on environment
     function createNavigationButtons() {
         const isNode = typeof process !== 'undefined' && process.release && process.release.name === 'node';
+        const buttonContainer = document.getElementById('buttonContainer');
 
         if (isNode) {
             createNavLink('Products', '/products');
@@ -99,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             window.location.href = url;
         });
-        buttonContainer.appendChild(button);
+        document.getElementById('buttonContainer').appendChild(button);
     }
 
     // Function to create an <a> element
@@ -108,20 +110,19 @@ document.addEventListener('DOMContentLoaded', function() {
         link.classList.add('common-link');
         link.textContent = text;
         link.href = url;
-        buttonContainer.appendChild(link);
+        document.getElementById('buttonContainer').appendChild(link);
     }
 
-    
     // Function to redirect to login page
     function redirectToLogin() {
-    console.log('Redirecting to login page...');
-    const currentLocation = window.location.pathname;
-    if (currentLocation !== '/login.html') {
-        console.log('Current location:', currentLocation);
-        window.location.href = 'login.html';
+        console.log('Redirecting to login page...');
+        const currentLocation = window.location.pathname;
+        if (currentLocation !== '/login.html') {
+            console.log('Current location:', currentLocation);
+            window.location.href = 'login.html';
+        }
     }
-    }
-    
+
     function checkForSavedCart() {
         const savedCart = sessionStorage.getItem('shoppingCart');
         if (savedCart) {
@@ -129,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateCartCount(); // Update cart count displayed in the header
         }
     }
+
     // Function to update the cart count displayed in the header
     function updateCartCount() {
         const cartCountElement = document.querySelector('.cart-count');
@@ -144,5 +146,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Call the function to check login status when the page loads
     checkLoginStatus();
+
     checkForSavedCart();
 });

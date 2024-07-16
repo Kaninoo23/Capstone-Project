@@ -73,6 +73,13 @@ app.get('/check-login', verifyToken, async (req, res) => {
     }
 });
 
+// Route to handle logout
+app.post('/logout', verifyToken, (req, res) => {
+    // Perform logout logic here
+    // For example, clear session data or invalidate token
+    res.status(200).json({ message: 'Logout successful' });
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
