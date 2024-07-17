@@ -1,10 +1,15 @@
-// Import necessary modules
+// server.js
+
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
+// Import routes
+const router = require('./routes/routes');
 
 // Middleware to verify JWT token
 function verifyToken(req, res, next) {
@@ -30,6 +35,9 @@ function verifyToken(req, res, next) {
     });
 }
 
+// Load environment variables from .env
+dotenv.config();
+
 // Create Express app
 const app = express();
 const port = process.env.PORT || 3000;
@@ -52,8 +60,7 @@ db.once('open', () => {
 });
 
 // Routes
-const routes = require('./routes/routes');
-app.use('/', routes); // Mount the routes at the root path
+app.use('/', router);
 
 // Route to check login status
 app.get('/check-login', verifyToken, async (req, res) => {
@@ -65,7 +72,6 @@ app.get('/check-login', verifyToken, async (req, res) => {
             return res.status(404).json({ error: 'User not found' });
         }
 
-        // Return user information or any other relevant data
         res.status(200).json({ loggedIn: true, user: { name: user.name, email: user.email } });
     } catch (error) {
         console.error('Error checking login status:', error);
@@ -78,6 +84,11 @@ app.post('/logout', verifyToken, (req, res) => {
     // Perform logout logic here
     // For example, clear session data or invalidate token
     res.status(200).json({ message: 'Logout successful' });
+});
+
+app.get('/get-user-ip', (req, res) => {
+    const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    res.json({ ip: userIp });
 });
 
 // Error handling middleware

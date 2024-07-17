@@ -77,20 +77,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to create navigation buttons based on environment
     function createNavigationButtons() {
-        const isNode = typeof process !== 'undefined' && process.release && process.release.name === 'node';
+        // Adjust logic based on your specific requirements for navigation buttons
         const buttonContainer = document.getElementById('buttonContainer');
-
-        if (isNode) {
-            createNavLink('Products', '/products');
-            createNavLink('About', '#');
-            createNavLink('Contact', '#');
-            createNavLink('Shopping Cart', '/shopping-cart');
-        } else {
-            createButton('Products', 'products.html');
-            createButton('About', '#'); // Replace '#' with actual link
-            createButton('Contact', '#'); // Replace '#' with actual link
-            createButton('Shopping Cart', 'shopping-cart.html');
-        }
+        createButton('Products', 'products.html');
+        createButton('About', '#'); // Replace '#' with actual link
+        createButton('Contact', '#'); // Replace '#' with actual link
+        createButton('Shopping Cart', 'shopping-cart.html');
     }
 
     // Function to create a button element
@@ -104,15 +96,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('buttonContainer').appendChild(button);
     }
 
-    // Function to create an <a> element
-    function createNavLink(text, url) {
-        const link = document.createElement('a');
-        link.classList.add('common-link');
-        link.textContent = text;
-        link.href = url;
-        document.getElementById('buttonContainer').appendChild(link);
-    }
-
     // Function to redirect to login page
     function redirectToLogin() {
         console.log('Redirecting to login page...');
@@ -123,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Function to check for saved cart items
     function checkForSavedCart() {
         const savedCart = sessionStorage.getItem('shoppingCart');
         if (savedCart) {
@@ -144,8 +128,71 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Function to fetch visitor data from ipinfo.io
+    async function fetchVisitorData() {
+        try {
+            // Fetch visitor data including IP and location
+            const response = await fetch("https://ipinfo.io/json");
+            const jsonResponse = await response.json();
+            
+            console.log('Visitor IP:', jsonResponse.ip);
+            console.log('Visitor Country:', jsonResponse.country);
+            
+            // Extract latitude and longitude
+            const { loc } = jsonResponse;
+            const [latitude, longitude] = loc.split(',');
+            console.log('Latitude:', latitude);
+            console.log('Longitude:', longitude);
+            
+            // Fetch forecast data based on coordinates
+            const pointsUrl = `https://api.weather.gov/points/${latitude},${longitude}`;
+            const pointsResponse = await fetch(pointsUrl);
+            const pointsData = await pointsResponse.json();
+            
+            // Extract forecast URLs
+            const forecastUrl = pointsData.properties.forecast;
+            const forecastHourlyUrl = pointsData.properties.forecastHourly;
+            const forecastGridDataUrl = pointsData.properties.forecastGridData;
+            
+            // Fetch the forecasts
+            const forecastResponse = await fetch(forecastUrl);
+            const forecastData = await forecastResponse.json();
+            
+            const forecastHourlyResponse = await fetch(forecastHourlyUrl);
+            const forecastHourlyData = await forecastHourlyResponse.json();
+            
+            const forecastGridDataResponse = await fetch(forecastGridDataUrl);
+            const forecastGridData = await forecastGridDataResponse.json();
+            
+            console.log('Forecast Data:', forecastData);
+            console.log('Forecast Hourly Data:', forecastHourlyData);
+            console.log('Forecast Grid Data:', forecastGridData);
+            
+            // Example: Update UI with weather information
+            updateWeatherUI(forecastData.properties.periods[0]); // Update UI with the first period of the forecast
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            // Handle errors
+        }
+    }
+    
+    function updateWeatherUI(weatherData) {
+        // Example: Displaying weather information
+        const weatherInfoContainer = document.getElementById('weather-info');
+        weatherInfoContainer.innerHTML = `
+            <h2>Weather Information</h2>
+            <p>Temperature: ${weatherData.temperature} °C</p>
+            <p>Description: ${weatherData.shortForecast}</p>
+            <img src="${weatherData.icon}" alt="Weather Icon">
+        `;
+    }
+
     // Call the function to check login status when the page loads
     checkLoginStatus();
 
+    // Call the function to fetch visitor data and weather
+    fetchVisitorData();
+
+    // Call the function to check for saved cart items
     checkForSavedCart();
 });

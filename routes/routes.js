@@ -1,12 +1,14 @@
 // routes.js
 const express = require('express');
-const router = express.Router();
-const { loginUser } = require('../Services/authService');
-const { verifyToken } = require('../middlewares/authMiddleware');
-const User = require('../models/Users'); // Adjust path as per your project structure
+const { loginUser } = require('../Services/authService'); 
+const { verifyToken } = require('../middlewares/authMiddleware'); 
+const User = require('../models/Users'); // Adjusted import path
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
+
+const router = express.Router();
 
 // Route for handling signup POST request
 router.post('/signup', async (req, res) => {
@@ -70,7 +72,6 @@ router.post('/login', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
 
 // Route to check login status
 router.get('/check-login', verifyToken, async (req, res) => {
