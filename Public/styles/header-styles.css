@@ -1,4 +1,6 @@
-/* reset.css */
+/* header-styles.css */
+
+/* Reset default margin and padding for the body */
 html, body, header, nav, button {
   margin: 0;
   padding: 0;
@@ -8,9 +10,8 @@ html, body, header, nav, button {
   vertical-align: baseline;
 }
 
-/* header-styles.css */
 body {
-  font-family: Arial, sans-serif; /* Example font family */
+  font-family: Arial, sans-serif;
 }
 
 .header {
@@ -58,8 +59,20 @@ body {
 
 .center-text {
   text-align: center;
+  margin-top: 50px; /* Adjust as needed */
+  animation: bounce-in 1s ease-out forwards;
   color: #149CEA;
-  animation: slideIn 1s ease-in-out forwards;
+}
+
+@keyframes bounce-in {
+  0% {
+      opacity: 0;
+      transform: translateY(-50px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
 }
 
 .button-container {
@@ -129,6 +142,7 @@ body {
   border-radius: 50%;
   visibility: hidden; /* Hide initially */
 }
+
 #logoutButton {
   padding: 10px 20px;
   background-color: #333; /* Match the background color of other buttons */
@@ -174,5 +188,3 @@ body {
   box-shadow: inset 0px 0px 25px #1479EA;
   color: white;
 }
-
-

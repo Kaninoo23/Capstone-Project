@@ -177,12 +177,12 @@ document.addEventListener('DOMContentLoaded', function() {
         return shoppingCart.reduce((total, item) => total + (item.price * item.quantity), 0);
     }
 
-    // Function to calculate tax (dummy implementation)
+    // Function to calculate tax 
     function calculateTax() {
         return 2; // Placeholder value, replace with actual tax calculation
     }
 
-    // Function to calculate shipping (dummy implementation)
+    // Function to calculate shipping
     function calculateShipping() {
         return 5; // Placeholder value, replace with actual shipping calculation
     }

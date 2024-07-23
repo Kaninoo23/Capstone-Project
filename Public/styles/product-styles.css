@@ -22,6 +22,7 @@
 .product-card {
     width: 200px; 
     display: block;
+    color: rgb(247, 10, 10);
     margin: 0 auto; 
     background-color: rgba(0, 0, 0, 0); 
     border-radius: 8px; 
@@ -73,13 +74,13 @@
     border: 3px ridge #149CEA;
     outline: none;
     background-color: transparent;
-    color: white; /* Ensure text color is explicitly set */
+    color: white; 
     transition: 1s;
     border-radius: 0.3em;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    display: inline-block; /* Ensure button behaves like a block element */
+    display: inline-block; 
 }
 
 .add-to-cart-button::after,
