@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const weatherInfoContainer = document.getElementById('weather-info');
         weatherInfoContainer.innerHTML = `
             <h2>Weather Information</h2>
-            <p>Temperature: ${weatherData.temperature} °C</p>
+            <p>Temperature: ${weatherData.temperature} °F</p>
             <p>Description: ${weatherData.shortForecast}</p>
             <img src="${weatherData.icon}" alt="Weather Icon">
         `;
