@@ -1,39 +1,29 @@
-// routes.js
 const express = require('express');
-const { loginUser } = require('../Services/authService'); 
+const path = require('path');
+const authService = require('../Services/authService');  
 const { verifyToken } = require('../middlewares/authMiddleware'); 
-const User = require('../models/Users'); // Adjusted import path
+const router = express.Router();
+const User = require('../models/Users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv');
-dotenv.config();
 
-const router = express.Router();
-
+ 
 // Route for handling signup POST request
 router.post('/signup', async (req, res) => {
+    const { name, email, password, address, city, state, zip } = req.body;
+
     try {
-        const { name, email, password, address, city, state, zip } = req.body;
-
-        // Validate required fields
-        if (!name || !email || !password || !address || !city || !state || !zip) {
-            throw new Error('All fields are required');
-        }
-
         // Check if user with the same email already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             throw new Error('User with this email already exists');
         }
 
-        // Hash password
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Create new user
+        // Create new user without manually hashing the password
         const newUser = new User({
             name,
             email,
-            password: hashedPassword,
+            password, // plain password; middleware will hash it
             address,
             city,
             state,
@@ -51,27 +41,37 @@ router.post('/signup', async (req, res) => {
     }
 });
 
+
 // Route for handling login POST request
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        // Find user by email
         const user = await User.findOne({ email });
-
         if (!user) {
-            return res.status(401).json({ error: 'Invalid credentials' });
+            throw new Error('Invalid credentials - User not found');
         }
 
-        // Generate a dynamic JWT token
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '4h' });
-        res.status(200).json({ message: 'Login successful', token });
+        // Log the plain text password and the hashed password from the database
+        console.log('Plain text password during login:', password);
+        console.log('Hashed password from DB:', user.password);
 
+        // Compare passwords
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            throw new Error('Invalid credentials - Incorrect password');
+        }
+
+        // Generate JWT
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.status(200).json({ token });
     } catch (error) {
-        console.error('Error:', error.message);
-        res.status(500).json({ error: 'Internal Server Error' });
+        console.error('Login error:', error.message);
+        res.status(401).json({ error: error.message });
     }
 });
+
+
 
 // Route to check login status
 router.get('/check-login', verifyToken, async (req, res) => {
@@ -88,6 +88,11 @@ router.get('/check-login', verifyToken, async (req, res) => {
         console.error('Error checking login status:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
+});
+
+// Serve the home page (static file)
+router.get('/home', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'home.html'));
 });
 
 module.exports = router;

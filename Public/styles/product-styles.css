@@ -117,6 +117,12 @@
     box-shadow: inset 0px 0px 25px #1479EA;
     color: white; /* Ensure text color remains white on hover */
 }
-
+/* Footer Styles */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
 
 

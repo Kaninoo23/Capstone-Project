@@ -142,5 +142,12 @@
     opacity: 1;
     transform: translateY(0);
 }
+/* Footer Styles */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
 
 

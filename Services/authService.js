@@ -1,6 +1,6 @@
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/Users');
+const User = require('../models/Users'); 
+const bcrypt = require('bcrypt');
 
 async function loginUser(email, password) {
     try {
@@ -10,15 +10,20 @@ async function loginUser(email, password) {
             throw new Error('Invalid credentials - User not found');
         }
 
-        const isPasswordValid = await bcrypt.compare(password, user.password);
+        console.log('Plain text password during login:', password);
+        console.log('Hashed password from DB:', user.password);
+
+        const isPasswordValid = await bcrypt.compare(password.trim(), user.password);
+        console.log('Password validation:', isPasswordValid);
 
         if (!isPasswordValid) {
             throw new Error('Invalid credentials - Incorrect password');
         }
 
+        // Generate JWT token
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-        console.log('Login successful for:', user.email); // Log successful login
+        console.log(`User ${user.email} logged in successfully`);
+        console.log('Generating token with secret:', process.env.JWT_SECRET);
 
         return { token };
     } catch (error) {
@@ -30,4 +35,3 @@ async function loginUser(email, password) {
 module.exports = {
     loginUser,
 };
-

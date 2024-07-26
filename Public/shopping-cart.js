@@ -2,25 +2,21 @@
 let shoppingCart = [];
 
 document.addEventListener('DOMContentLoaded', function() {
+    
     const buttonContainer = document.querySelector('.button-container'); // Corrected selector
-
-    // Check if running in Node.js environment
-    const isNode = typeof process !== 'undefined' && process.release && process.release.name === 'node';
     
     buttonContainer.innerHTML = ''; // Clear existing content
 
-    // Create buttons or links based on environment
-    if (isNode) {
-        createNavLink('Home', '/home');
-        createNavLink('Products', '/products');
-        createNavLink('About', '#'); // Replace '#' with actual link
-        createNavLink('Contact', '#'); // Replace '#' with actual link
-    } else {
+    createNavigationButtons();
+
+    function createNavigationButtons() {
+        // Adjust logic based on your specific requirements for navigation buttons
+        const buttonContainer = document.getElementById('buttonContainer');
         createButton('Home', 'home.html');
         createButton('Products', 'products.html');
-        createButton('About', '#'); // Replace '#' with actual link
+        createButton('About', 'about.html'); 
         createButton('Contact', '#'); // Replace '#' with actual link
-    }
+        }
 
     // Function to create a button element
     function createButton(text, url) {

@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Adjust logic based on your specific requirements for navigation buttons
         const buttonContainer = document.getElementById('buttonContainer');
         createButton('Products', 'products.html');
-        createButton('About', '#'); // Replace '#' with actual link
+        createButton('About', 'about.html'); 
         createButton('Contact', '#'); // Replace '#' with actual link
         createButton('Shopping Cart', 'shopping-cart.html');
     }

@@ -24,19 +24,24 @@
         <span class="cart-count"></span> 
     </header>
     
-    <main class="index-main">
-        
-        <p id="userInfo">Welcome, Guest!</p>
+    <!-- Wrap your main content inside a div with class home-background -->
+    <div class="home-background">
+        <main class="index-main">
+            <p id="userInfo">Welcome, Guest!</p>
 
-        <div id="weather-info">
-            <h2>Weather Information</h2>
-            <p id="temperature">Loading...</p>
-            <p id="weather-description"></p>
-            <img id="weather-icon" src="" alt="Weather Icon">
-        </div>
-    </main>
+            <div id="weather-info">
+                <h2>Weather Information</h2>
+                <p id="temperature">Loading...</p>
+                <p id="weather-description"></p>
+                <img id="weather-icon" src="" alt="Weather Icon">
+            </div>
+        </main>
+    </div>
     
-    <span class="cart-count"></span>
+    <footer>
+        <p>&copy; 2024 Key-Me-Up. All rights reserved.</p>
+    </footer>
+    
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="home.js"></script>
 </body>

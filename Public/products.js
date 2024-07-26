@@ -1,22 +1,19 @@
 let shoppingCart = []; // Define shoppingCart globally
 
 document.addEventListener('DOMContentLoaded', function() {
+    
     const buttonContainer = document.getElementById('buttonContainer');
-
-    // Check if running in Node.js environment
-    const isNode = typeof process !== 'undefined' && process.release && process.release.name === 'node';
 
     buttonContainer.innerHTML = ''; // Clear existing content
 
-    if (isNode) {
-        createNavLink('Home', '/home');
-        createNavLink('About', '#');
-        createNavLink('Contact', '#');
-        createNavLink('Shopping Cart', '/shopping-cart');
-    } else {
+    createNavigationButtons();
+
+    function createNavigationButtons() {
+        // Adjust logic based on your specific requirements for navigation buttons
+        const buttonContainer = document.getElementById('buttonContainer');
         createButton('Home', 'home.html');
-        createButton('About', '#');
-        createButton('Contact', '#');
+        createButton('About', 'about.html'); 
+        createButton('Contact', '#'); // Replace '#' with actual link
         createButton('Shopping Cart', 'shopping-cart.html');
     }
 
