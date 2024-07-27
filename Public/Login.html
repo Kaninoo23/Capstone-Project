@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="styles/header-styles.css">
-    <link rel="stylesheet" href="styles/signup-styles.css">
+    <link rel="stylesheet" href="styles/login-styles.css">
     <link rel="icon" href="Images/favicon.png" type="image/x-icon">
 </head>
 <body>
@@ -13,9 +13,12 @@
         <div class="logo-container">
             <img src="Images/logo.png" alt="logo" class="logo">
         </div>
-        <div class="center-text">
+        <div class="center-text header-text">
             <h1>Login</h1>
         </div>
+        <nav class="button-container" id="buttonContainer">
+            <!-- Navigation buttons -->
+        </nav>
     </header>
 
     <div class="container">
@@ -29,14 +32,19 @@
             <br>
             <button type="submit">Login</button>
         </form>
+
+        <!-- Separate container for "Don't have an account?" link -->
+        <div class="signup-link">
+            <div class="center-text">
+                <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+            </div>
+        </div>
     </div>
 
-    <!-- Optionally, include a link to the sign-up page -->
-    <div class="center-text">
-        <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
-    </div>
+    <footer>
+        <p>&copy; 2024 Key-Me-Up. All rights reserved.</p>
+    </footer>
 
-    <!-- Include your JavaScript file for handling login -->
     <script src="login.js"></script>
 </body>
 </html>

@@ -8,14 +8,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof process !== 'undefined' && process.release && process.release.name === 'node') {
         createNavLink('Home', '/home');
         createNavLink('Products', '/products');
-        createNavLink('About', '#'); // Replace '#' with actual link
-        createNavLink('Contact', '#'); // Replace '#' with actual link
+        createNavLink('About', '#'); 
+        createNavLink('Contact', '#'); 
         createNavLink('Shopping Cart', '/shopping-cart');
     } else {
         createButton('Home', 'home.html');
         createButton('Products', 'Products.html');
-        createButton('About', '#'); // Replace '#' with actual link
-        createButton('Contact', '#'); // Replace '#' with actual link
+        createButton('About', 'about.html');
+        createButton('Contact', 'contact.html');
         createButton('Shopping Cart', 'shopping-cart.html');
     }
 
@@ -53,6 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Call updateCartCount() or any other necessary functions
+    // Call updateCartCount() 
     updateCartCount();
 });

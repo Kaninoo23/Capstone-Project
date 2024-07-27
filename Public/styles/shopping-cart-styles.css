@@ -1,147 +1,141 @@
-/* Existing styles for cart items and container */
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-.cart-container {
+/* Basic styles for body and HTML */
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     flex-direction: column;
+    background-image: url('../Images/background.jpg'); /* Adjust path relative to your CSS file */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+.common-button {
+    background-color: #555;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.common-button:hover {
+    background-color: #777;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.center-text h1 {
+    font-size: 28px; /* Adjust font size for the heading */
+}
+
+/* Main container styles */
+.cart-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
 .cart-items {
-    max-width: 600px; /* Adjust the max width of the cart items container */
+    width: 100%;
+    max-width: 700px; /* Adjust max-width as needed */
+    margin-top: 20px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
-    background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.cart-item {
-    display: flex; /* Change display to flex */
-    flex-direction: column; /* Change flex direction to column */
-    justify-content: center; /* Center items horizontally */
-    align-items: center; /* Center items vertically */
-    margin-bottom: 10px;
-    padding: 20px;
-    border-bottom: 1px solid #ddd;
-}
-
 .cart-item img {
-    max-width: 100px; /* Adjust max-width as needed */
-    height: auto; /* Maintain aspect ratio */
+    max-width: 100px;
+    height: auto;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.cart-item-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adjust vertical spacing between details */
+}
+
+.cart-item-name {
+    font-size: 16px;
+    font-weight: bold;
     margin-bottom: 10px;
 }
 
-.cart-item:last-child {
-    color: #888;
-}
-
-.cart-item span {
-    display: block;
-    font-size: 16px;
-}
-
-.cart-item span:first-child {
-    font-weight: bold;
-}
-
-.cart-item span:last-child {
-    color: #888;
-}
-
-/* Styling for the checkout button remains unchanged */
-.checkout-button {
-    display: block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #0056b3;
-    color: #fff;
-    border: 3px ridge #149CEA; /* Use ridge border style */
-    outline: none;
-    transition: background-color 0.3s, color 0.3s;
-    border-radius: 5px;
-    cursor: pointer;
-    position: relative; /* Ensure positioning context for pseudo-elements */
-    overflow: hidden; /* Ensure pseudo-elements stay within button bounds */
-    z-index: 1; /* Ensure button content is above pseudo-elements */
-}
-
-.checkout-button::after,
-.checkout-button::before {
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: 3%;
-    width: 95%;
-    height: 40%;
-    background-color: transparent; /* Set pseudo-element background to transparent */
-    transition: transform 0.5s;
-    transform-origin: center;
-}
-
-.checkout-button::before {
-    top: 100%;
-    transform-origin: bottom center;
-}
-
-.checkout-button:hover::before,
-.checkout-button:hover::after {
-    transform: scaleY(0); /* Scale to hide the pseudo-elements */
-}
-
-.checkout-button:hover {
-    background-color: #0056b3;
-    color: white;
-    box-shadow: inset 0px 0px 25px #1479EA; /* Optional: add inset shadow on hover */
+.cart-item-price {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
 }
 
 .remove-from-cart-button {
-    display: inline-block;
-    padding: 8px 16px; /* Adjust padding for smaller size */
-    background-color: #dc3545; /* Red background color */
-    color: #fff; /* White text color */
-    border: 2px ridge #dc3545; /* Ridge border style matching the background color */
+    background-color: #555;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
     border-radius: 4px;
     cursor: pointer;
-    outline: none;
-    transition: background-color 0.3s, color 0.3s, transform 0.3s;
-    font-size: 12px; /* Adjust font size */
-    margin-top: 10px;
-    transform: translateY(10px); /* Initially move button down */
+    font-size: 14px;
+    transition: background-color 0.3s ease;
 }
 
-.remove-from-cart-button::before,
-.remove-from-cart-button::after {
-    content: "";
-    position: absolute;
-    top: -8px;
-    left: 3%;
-    width: 94%;
-    height: 32%;
-    background-color: transparent;
-    transition: transform 0.5s;
-    transform-origin: center;
+.cart-summary {
+    width: 100%;
+    max-width: 300px; /* Adjust max-width as needed */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
-.remove-from-cart-button::before {
-    top: 100%;
-    transform-origin: bottom center;
+.cart-summary div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-.remove-from-cart-button:hover::before,
-.remove-from-cart-button:hover::after {
-    transform: scaleY(0);
+.cart-summary button.checkout-button {
+    background-color: #555;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
 }
 
-.remove-from-cart-button:hover {
-    background-color: #c82333; /* Darker red on hover */
-    box-shadow: inset 0px 0px 15px #c82333; /* Optional: add inset shadow on hover */
-}
 
-.remove-from-cart-button.show {
-    opacity: 1;
-    transform: translateY(0);
-}
 /* Footer Styles */
 footer {
     background: #333;
@@ -149,5 +143,3 @@ footer {
     text-align: center;
     padding: 10px;
 }
-
-

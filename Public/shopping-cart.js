@@ -10,12 +10,12 @@ document.addEventListener('DOMContentLoaded', function() {
     createNavigationButtons();
 
     function createNavigationButtons() {
-        // Adjust logic based on your specific requirements for navigation buttons
+        // Logic based on your specific requirements for navigation buttons
         const buttonContainer = document.getElementById('buttonContainer');
         createButton('Home', 'home.html');
         createButton('Products', 'products.html');
         createButton('About', 'about.html'); 
-        createButton('Contact', '#'); // Replace '#' with actual link
+        createButton('Contact', 'contact.html'); // Replace '#' with actual link
         }
 
     // Function to create a button element
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
     checkoutButton.addEventListener('click', function() {
         window.location.href = 'checkout.html'; // Redirect to checkout page
     });
-    // Add event listeners to all Add to Cart buttons when the DOM is fully loaded
+    // Event listeners to all Add to Cart buttons when the DOM is fully loaded
     const addToCartButtons = document.querySelectorAll('.add-to-cart-button');
     addToCartButtons.forEach(button => {
         button.addEventListener('click', function(event) {

@@ -18,7 +18,7 @@ html, body {
     background-repeat: no-repeat;
 }
 
-/* Styles for the main content */
+/* Styles for the main container */
 main {
     flex: 1;
     display: flex;
@@ -27,13 +27,22 @@ main {
     padding: 20px;
 }
 
-/* Styles for the section containing content */
-section {
-    max-width: 800px; /* Adjust as needed */
+/* Styles for the GIF container */
+.gif-container {
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.8); /* Optional: Add a semi-transparent background */
-    padding: 20px;
-    border-radius: 8px;
+}
+
+.gif-container img {
+    max-width: 100%;
+    height: auto;
+    max-width: 300px;
+    max-height: 200px;
+}
+
+.gif-container p {
+    font-size: 16px;
+    color: #fcf9f9;
+    margin-top: 10px;
 }
 
 /* Footer Styles */

@@ -77,11 +77,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to create navigation buttons based on environment
     function createNavigationButtons() {
-        // Adjust logic based on your specific requirements for navigation buttons
+        // Logic based on your specific requirements for navigation buttons
         const buttonContainer = document.getElementById('buttonContainer');
         createButton('Products', 'products.html');
         createButton('About', 'about.html'); 
-        createButton('Contact', '#'); // Replace '#' with actual link
+        createButton('Contact', 'contact.html'); 
         createButton('Shopping Cart', 'shopping-cart.html');
     }
 
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Forecast Hourly Data:', forecastHourlyData);
             console.log('Forecast Grid Data:', forecastGridData);
             
-            // Example: Update UI with weather information
+            // Update UI with weather information
             updateWeatherUI(forecastData.properties.periods[0]); // Update UI with the first period of the forecast
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function updateWeatherUI(weatherData) {
-        // Example: Displaying weather information
+        // Displaying weather information
         const weatherInfoContainer = document.getElementById('weather-info');
         weatherInfoContainer.innerHTML = `
             <h2>Weather Information</h2>

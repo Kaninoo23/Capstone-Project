@@ -60,5 +60,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
     checkForSavedCart();
 });
-
-

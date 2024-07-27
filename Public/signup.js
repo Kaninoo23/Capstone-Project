@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 const result = await response.json();
                 console.log('Signup successful:', result);
-                alert('Signup successful!'); // Optional: Show success message
+                alert('Signup successful!'); // Show success message
                 
             } catch (error) {
                 console.error('Error signing up:', error);

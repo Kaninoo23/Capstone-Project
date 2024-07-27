@@ -22,13 +22,14 @@ html, body {
 .container {
     flex: 1;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
     align-items: center;
     padding: 20px;
 }
 
-/* Styles for the form */
-#signupForm {
+/* Styles for the login form */
+#loginForm {
     width: 100%; /* Make the form full-width */
     max-width: 400px; /* Set maximum width for the form */
     background-color: rgba(255, 255, 255, 0.8); /* Optional: Add a semi-transparent background */
@@ -36,16 +37,16 @@ html, body {
     border-radius: 8px;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow */
-    margin: auto; /* Center the form horizontally */
+    margin-bottom: 20px; /* Add bottom margin to separate from "Don't have an account?" link */
 }
 
-#signupForm label {
+#loginForm label {
     display: block;
     margin-bottom: 10px;
     text-align: left;
 }
 
-#signupForm input {
+#loginForm input {
     width: calc(100% - 12px); /* Adjust width to accommodate padding */
     padding: 8px;
     margin-bottom: 15px;
@@ -54,7 +55,7 @@ html, body {
     font-size: 16px;
 }
 
-#signupForm button {
+#loginForm button {
     background-color: #333;
     color: #fff;
     padding: 12px 24px;
@@ -62,10 +63,27 @@ html, body {
     border-radius: 4px;
     cursor: pointer;
     font-size: 18px;
+    margin-bottom: 15px; /* Add bottom margin to separate from "Don't have an account?" link */
 }
 
-#signupForm button:hover {
+#loginForm button:hover {
     background-color: #555;
+}
+.signup-link {
+    margin-top: 10px; /* Adjust top margin for spacing */
+}
+
+.signup-link .center-text {
+    text-align: center;
+}
+
+.signup-link .center-text a {
+    color: #faf8f8;
+    text-decoration: none;
+}
+
+.signup-link .center-text a:hover {
+    text-decoration: underline;
 }
 
 /* Footer Styles */
