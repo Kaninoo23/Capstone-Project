@@ -11,13 +11,21 @@ Node.js.  This can be downloaded at https://nodejs.org/en.  I used Default port:
 mongodb.  I used mongodb compass to havea UI and then i used default port mongodb://localhost:27017.
 
 npm install bcrypt
+
 npm install body-parser
+
 npm install bootstrap
+
 npm install cors
+
 npm install dotenv
+
 npm install express
+
 npm install jsonwebtoken
+
 npm install mongodb
+
 npm install mongoose 
 
 Enjoy!!!
