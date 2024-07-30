@@ -6,7 +6,7 @@ Node.js.  This can be downloaded at https://nodejs.org/en.  I used Default port:
 
 mongodb.  I used mongodb compass to havea UI and then i used default port mongodb://localhost:27017. This can be download at https://www.mongodb.com/products/tools/compass.
 
-To start node server use command node server.js
+To start node server use command node server.js in ther terminal
 
 npm install bcrypt
 
