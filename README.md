@@ -9,6 +9,7 @@ This projects uses node.js and can be access by typing http://localhost:3000/hom
 The dependents you will need and can downloaded once you have node.js with a command in  terminal.  You can find the commands down below next to the depends.  Only two you can't get with a command is Node.js and mongodb compass(Links previded below) 
 Node.js.  This can be downloaded at https://nodejs.org/en.  I used Default port:3000
 mongodb.  I used mongodb compass to havea UI and then i used default port mongodb://localhost:27017.
+
 npm install bcrypt
 npm install body-parser
 npm install bootstrap
