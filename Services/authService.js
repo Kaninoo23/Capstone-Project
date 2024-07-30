@@ -10,8 +10,8 @@ async function loginUser(email, password) {
             throw new Error('Invalid credentials - User not found');
         }
 
-        console.log('Plain text password during login:', password);
-        console.log('Hashed password from DB:', user.password);
+        console.log('Plain text password during login:', password); // for testing/project can be removed
+        console.log('Hashed password from DB:', user.password);  //for testing/project can be removed
 
         const isPasswordValid = await bcrypt.compare(password.trim(), user.password);
         console.log('Password validation:', isPasswordValid);
