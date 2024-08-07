@@ -95,3 +95,36 @@ footer {
     margin-top: auto;
     flex-shrink: 0;
 }
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .index-main {
+        width: 90%;
+        padding: 15px;
+        margin-top: 0; /* Consider removing top positioning if it causes issues */
+        top: 0; /* Reset top positioning for mobile view */
+    }
+    
+    footer {
+        padding: 15px; /* Increase padding for better touch experience */
+    }
+}
+
+@media (max-width: 480px) {
+    .index-main {
+        width: 95%;
+        padding: 10px;
+    }
+
+    footer {
+        padding: 20px; /* Increase padding for smaller screens */
+    }
+}
+
+/* Ensure text hyphenation and proper wrapping */
+.text-container {
+    -webkit-hyphens: auto !important;
+    hyphens: auto !important;
+    word-wrap: break-word !important;
+    overflow-wrap: anywhere !important;
+}

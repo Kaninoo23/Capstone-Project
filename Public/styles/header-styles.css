@@ -1,101 +1,50 @@
-/* header-styles.css */
-
-/* Reset default margin and padding for the body */
-html, body, header, nav, button {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-
-body {
-  font-family: Arial, sans-serif;
-}
-
+/* Header Styles */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #333;
-  padding: 0 30px;
-  position: relative;
+  padding: 10px 20px;
+  box-sizing: border-box;
 }
 
 .logo-container {
-  width: 200px;
-  padding: 20px;
   display: flex;
   align-items: center;
+  flex-grow: 1;
 }
 
 .logo {
-  max-width: 100%;
-  max-height: 100%;
-  margin-right: 10px;
-}
-
-.button {
-  padding: 10px 20px;
-  background-color: #149CEA;
-  color: white;
-  border: none;
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-left: auto;
-}
-
-.common-link {
-  color: white;
-  text-decoration: none;
-  margin-left: 10px; /* Adjust margin as needed */
-  font-size: 18px; /* Increase font size */
-  padding: 8px 12px; /* Adjust padding to increase button size */
-}
-
-.center-text {
-  text-align: center;
-  margin-top: 50px; /* Adjust as needed */
-  animation: bounce-in 1s ease-out forwards;
-  color: #149CEA;
-}
-
-@keyframes bounce-in {
-  0% {
-      opacity: 0;
-      transform: translateY(-50px);
-  }
-  100% {
-      opacity: 1;
-      transform: translateY(0);
-  }
+  max-width: 150px;
+  height: auto;
 }
 
 .button-container {
   display: flex;
-  margin-top: 20px;
   gap: 10px;
-  justify-content: flex-start;
+  align-items: center;
 }
 
+/* Centered text in the header */
+.center-text {
+  flex: 1;
+  text-align: center;
+  color: #149CEA;
+}
+
+/* Button Styles */
 .header button {
-  /* Apply styles specifically to buttons inside the header */
   width: 10em;
-  position: relative;
   height: 3.5em;
   border: 3px ridge #149CEA;
-  outline: none;
   background-color: transparent;
   color: white;
-  transition: 1s;
+  transition: background-color 0.3s ease;
   border-radius: 0.3em;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
+  position: relative;
 }
 
 .header button::after,
@@ -130,61 +79,63 @@ body {
   color: white;
 }
 
+/* Cart Count */
 .cart-count {
   color: red;
   font-size: 14px;
   position: absolute;
-  top: 25px; /* Adjust top position to align it closer to the button */
-  right: 100px; /* Adjust right position to align it closer to the button */
+  top: 10px;
+  right: 10px;
   background-color: white;
   border: 1px solid red;
   padding: 3px 6px;
   border-radius: 50%;
-  visibility: hidden; /* Hide initially */
+  visibility: hidden;
 }
 
+/* Logout Button */
 #logoutButton {
   padding: 10px 20px;
-  background-color: #333; /* Match the background color of other buttons */
+  background-color: #333;
   color: white;
-  border: 3px ridge #149CEA; /* Use the same border style */
-  text-decoration: none;
+  border: 3px ridge #149CEA;
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  font-weight: bold; /* Ensure font weight matches */
-  position: relative; /* Adjust position if necessary */
+  font-weight: bold;
 }
 
-#logoutButton::after,
-#logoutButton::before {
-  content: "";
-  position: absolute;
-  width: 95%;
-  height: 40%;
-  background-color: #333; 
-  transition: 0.5s;
+/* Mobile Styles for Header */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo-container {
+    width: 100%;
+    justify-content: center;
+    padding-bottom: 10px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
 }
 
-#logoutButton::after {
-  top: -10px;
-  left: 3%;
-  transform-origin: center;
-}
+@media (max-width: 480px) {
+  .header {
+    padding: 5px;
+  }
 
-#logoutButton::before {
-  top: 80%;
-  left: 3%;
-  transform-origin: center;
-}
+  .logo-container {
+    padding-bottom: 5px;
+  }
 
-#logoutButton:hover::before,
-#logoutButton:hover::after {
-  transform: scale(0);
-}
-
-#logoutButton:hover {
-  box-shadow: inset 0px 0px 25px #1479EA;
-  color: white;
+  .button-container {
+    gap: 5px;
+  }
 }

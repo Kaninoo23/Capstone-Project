@@ -1,3 +1,12 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f0f0f0; /* Ensure the background color is consistent */
+    overflow-x: hidden;
+  }
+
 .products-main {
     background-image: url('../Images/Background.jpg');
     background-size: cover; /* Ensure the image covers the entire background */
@@ -125,4 +134,35 @@ footer {
     padding: 10px;
 }
 
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .index-main {
+        width: 90%;
+        padding: 15px;
+        margin-top: 0; /* Consider removing top positioning if it causes issues */
+        top: 0; /* Reset top positioning for mobile view */
+    }
+    
+    footer {
+        padding: 15px; /* Increase padding for better touch experience */
+    }
+}
 
+@media (max-width: 480px) {
+    .index-main {
+        width: 95%;
+        padding: 10px;
+    }
+
+    footer {
+        padding: 20px; /* Increase padding for smaller screens */
+    }
+}
+
+/* Ensure text hyphenation and proper wrapping */
+.text-container {
+    -webkit-hyphens: auto !important;
+    hyphens: auto !important;
+    word-wrap: break-word !important;
+    overflow-wrap: anywhere !important;
+}

@@ -1,40 +1,47 @@
-/* Apply a background image to the entire page */
-.home-background {
-    background-image: url('../Images/Background.jpg');
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+/* Home Background Styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f0f0f0; /* Ensure the background color is consistent */
+    overflow-x: hidden;
+  }
 
-/* Adjust the main container's position */
-.index-main {
+  .home-background, .index-main {
+    box-sizing: border-box;
+  }
+
+.home-background {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.8);
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    background: url('../Images/Background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh; /* Ensure the background covers the full viewport height */
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Main Content Styles */
+  .index-main {
+    background-color: white; /* Background color for the card */
     padding: 20px;
     border-radius: 8px;
-    width: 80%;
-    max-width: 600px;
-    margin-top: 0; /* Adjust as needed, try different values */
-    position: relative;
-    top: -200px; /* Move content up from its normal position */
-}
-
-
-
-/* Footer Styles */
-footer {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for a lifted effect */
+    width: 100%; /* Adjust width as needed */
+    max-width: 800px; /* Adjust max-width as needed */
+    text-align: center; /* Center text inside the main content */
+  }
+  
+  /* Footer Styles */
+  footer {
     background: #333;
     color: #fff;
     text-align: center;
     padding: 10px;
-    position: absolute;
-    bottom: 0;
     width: 100%;
-}
+    margin-top: auto; /* Push footer to the bottom if content is short */
+  }
+  
