@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Clear existing content in buttonContainer to prevent duplication
     buttonContainer.innerHTML = '';
 
-    // Function to create navigation buttons or links based on environment
+    // Create navigation buttons or links based on environment
     if (typeof process !== 'undefined' && process.release && process.release.name === 'node') {
         createNavLink('Home', '/home');
         createNavLink('Products', '/products');
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         createButton('Products', 'Products.html');
         createButton('About', 'about.html');
         createButton('Contact', 'contact.html');
-        createButton('Shopping Cart', 'shopping-cart.html');
+        createShoppingCartButton('Shopping Cart', 'shopping-cart.html');
     }
 
     // Function to create a button element
@@ -30,6 +30,26 @@ document.addEventListener('DOMContentLoaded', function() {
         buttonContainer.appendChild(button);
     }
 
+    // Function to create a shopping cart button with cart count
+    function createShoppingCartButton(text, url) {
+        const button = document.createElement('button');
+        button.textContent = text;
+        button.classList.add('common-button'); // Ensure this class has appropriate CSS styles
+        
+        // Create cart count span
+        const cartCount = document.createElement('span');
+        cartCount.className = 'cart-count'; // Ensure this class matches your CSS
+        button.appendChild(cartCount);
+
+        button.addEventListener('click', function() {
+            window.location.href = url;
+        });
+        buttonContainer.appendChild(button);
+
+        // Update cart count after appending the button
+        updateCartCount();
+    }
+
     // Function to create an <a> element
     function createNavLink(text, url) {
         const link = document.createElement('a');
@@ -39,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         buttonContainer.appendChild(link);
     }
 
-    // Function to update the cart count (if needed)
+    // Function to update the cart count
     function updateCartCount() {
         const cartCountElement = document.querySelector('.cart-count');
         if (cartCountElement) {

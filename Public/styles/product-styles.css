@@ -5,7 +5,7 @@ html, body {
     box-sizing: border-box;
     background-color: #f0f0f0; /* Ensure the background color is consistent */
     overflow-x: hidden;
-  }
+}
 
 .products-main {
     background-image: url('../Images/Background.jpg');
@@ -31,18 +31,17 @@ html, body {
 .product-card {
     width: 200px; 
     display: block;
-    color: rgb(247, 10, 10);
+    color: rgb(5, 0, 0);
     margin: 0 auto; 
-    background-color: rgba(0, 0, 0, 0); 
-    border-radius: 8px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    background-color: rgba(255, 255, 255, 0.5); /* Updated background color with transparency */
+    border-radius: 10px; /* Updated border radius */
+    border: 1px solid rgba(255, 255, 255, 0.18); /* Updated border */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Updated box shadow */
     padding: 20px; 
     box-sizing: border-box; 
-
-    /* Center align text in the card */
+    backdrop-filter: blur(7px); /* Added backdrop filter for blur effect */
+    -webkit-backdrop-filter: blur(7px); /* Added vendor prefix for Safari */
     text-align: center;
-
-    border: 3px ridge #149CEA;
 }
 
 .product-card .product-image {
@@ -59,7 +58,7 @@ html, body {
     display: block;
     margin-top: 10px; /* Adjust spacing */
     font-weight: bold;
-    color: white;
+    color: #fdfafa;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     padding: 5px;
 }
@@ -126,6 +125,7 @@ html, body {
     box-shadow: inset 0px 0px 25px #1479EA;
     color: white; /* Ensure text color remains white on hover */
 }
+
 /* Footer Styles */
 footer {
     background: #333;
@@ -136,6 +136,17 @@ footer {
 
 /* Mobile Styles */
 @media (max-width: 768px) {
+    .product-container {
+        /* Increase space around the cards for medium-sized screens */
+        justify-content: center; /* Center align the product cards */
+        gap: 20px; /* Add gap between product cards */
+    }
+    
+    .product-card {
+        width: 150px; /* Adjust the width of the product cards for smaller screens */
+        margin: 10px; /* Add margin to increase spacing */
+    }
+    
     .index-main {
         width: 90%;
         padding: 15px;
@@ -149,6 +160,17 @@ footer {
 }
 
 @media (max-width: 480px) {
+    .product-container {
+        /* Increase space around the cards for smaller screens */
+        justify-content: center; /* Center align the product cards */
+        gap: 20px; /* Add gap between product cards */
+    }
+    
+    .product-card {
+        width: 200px; /* Further adjust the width of the product cards for smaller screens */
+        margin: 15px; /* Increase margin for more spacing */
+    }
+    
     .index-main {
         width: 95%;
         padding: 10px;

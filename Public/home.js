@@ -77,12 +77,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to create navigation buttons based on environment
     function createNavigationButtons() {
-        // Logic based on your specific requirements for navigation buttons
-        const buttonContainer = document.getElementById('buttonContainer');
         createButton('Products', 'products.html');
         createButton('About', 'about.html'); 
         createButton('Contact', 'contact.html'); 
-        createButton('Shopping Cart', 'shopping-cart.html');
+        createShoppingCartButton('Shopping Cart', 'shopping-cart.html');
     }
 
     // Function to create a button element
@@ -96,6 +94,26 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('buttonContainer').appendChild(button);
     }
 
+    // Function to create a shopping cart button with cart count
+    function createShoppingCartButton(text, url) {
+        const button = document.createElement('button');
+        button.classList.add('common-button'); // Ensure this class has appropriate CSS styles
+        button.textContent = text;
+
+        // Create cart count span
+        const cartCount = document.createElement('span');
+        cartCount.className = 'cart-count'; // Ensure this class matches your CSS
+        button.appendChild(cartCount);
+
+        button.addEventListener('click', function() {
+            window.location.href = url;
+        });
+        document.getElementById('buttonContainer').appendChild(button);
+
+        // Update cart count after appending the button
+        updateCartCount();
+    }
+
     // Function to redirect to login page
     function redirectToLogin() {
         console.log('Redirecting to login page...');
@@ -105,20 +123,13 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = 'login.html';
         }
     }
-
-    // Function to check for saved cart items
-    function checkForSavedCart() {
-        const savedCart = sessionStorage.getItem('shoppingCart');
-        if (savedCart) {
-            shoppingCart = JSON.parse(savedCart);
-            updateCartCount(); // Update cart count displayed in the header
-        }
-    }
-
+    
     // Function to update the cart count displayed in the header
     function updateCartCount() {
         const cartCountElement = document.querySelector('.cart-count');
         if (cartCountElement) {
+            const savedCart = sessionStorage.getItem('shoppingCart');
+            shoppingCart = savedCart ? JSON.parse(savedCart) : [];
             const cartCount = shoppingCart.reduce((total, item) => total + item.quantity, 0);
             cartCountElement.textContent = cartCount;
             cartCountElement.style.visibility = cartCount > 0 ? 'visible' : 'hidden'; // Show only if cartCount > 0
@@ -193,6 +204,4 @@ document.addEventListener('DOMContentLoaded', function() {
     // Call the function to fetch visitor data and weather
     fetchVisitorData();
 
-    // Call the function to check for saved cart items
-    checkForSavedCart();
 });

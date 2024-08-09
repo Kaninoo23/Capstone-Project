@@ -16,8 +16,10 @@ html, body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    overflow-x: hidden; /* Prevent horizontal overflow */
 }
 
+/* General styles for buttons */
 .button-container {
     display: flex;
     gap: 10px;
@@ -57,56 +59,77 @@ html, body {
 
 .cart-items {
     width: 100%;
-    max-width: 700px; /* Adjust max-width as needed */
+    max-width: 300px; /* Adjust max-width as needed */
     margin-top: 20px;
+    overflow-x: auto; /* Allow horizontal scrolling if needed */
 }
 
 .cart-item {
     display: flex;
-    align-items: flex-start;
+    flex-direction: column; /* Stack items vertically */
+    align-items: stretch; /* Stretch items to fit the container width */
     margin-bottom: 10px;
     background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
+    padding: 15px; /* Adjusted padding */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
 .cart-item img {
-    max-width: 100px;
+    max-width: 100px; /* Adjust max-width for images */
     height: auto;
     border-radius: 8px;
-    margin-right: 20px;
+    margin-bottom: 10px; /* Space below image */
 }
 
 .cart-item-details {
-    flex: 1;
     display: flex;
-    flex-direction: column;
-    gap: 10px; /* Adjust vertical spacing between details */
+    flex-direction: column; /* Stack details vertically */
+    gap: 10px; /* Vertical spacing between details */
 }
 
 .cart-item-name {
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 5px; /* Space below item name */
 }
 
-.cart-item-price {
+.cart-item-price, .cart-item-quantity, .cart-item-subtotal {
     font-size: 14px;
     color: #777;
-    margin-bottom: 10px;
+}
+
+.cart-item-actions {
+    display: flex;
+    flex-direction: column; /* Stack actions vertically */
+    align-items: flex-end; /* Align to the end of the container */
+    gap: 10px; /* Space between actions */
+    margin-top: 10px; /* Space above actions */
 }
 
 .remove-from-cart-button {
     background-color: #555;
     color: #fff;
     border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
+    padding: 4px 6px; /* Further reduced padding */
+    border-radius: 4px; /* Optional: adjust as needed */
     cursor: pointer;
-    font-size: 14px;
+    font-size: 12px; /* Keep the smaller font size */
     transition: background-color 0.3s ease;
+    text-align: center; /* Center text inside the button */
+    width: auto; /* Make sure the width adjusts to content */
+    min-width: 80px; /* Optional: set a minimum width for consistent appearance */
+    max-width: 100px; /* Optional: set a maximum width to prevent excessive stretching */
+    display: inline-flex; /* Adjust display to align content correctly */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
 }
+
+.remove-from-cart-button:hover {
+    background-color: #777; /* Hover state */
+}
+
 
 .cart-summary {
     width: 100%;
@@ -135,7 +158,6 @@ html, body {
     font-size: 18px;
 }
 
-
 /* Footer Styles */
 footer {
     background: #333;
@@ -146,33 +168,37 @@ footer {
 
 /* Mobile Styles */
 @media (max-width: 768px) {
-    .index-main {
-        width: 90%;
+    .cart-container {
         padding: 15px;
-        margin-top: 0; /* Consider removing top positioning if it causes issues */
-        top: 0; /* Reset top positioning for mobile view */
     }
-    
-    footer {
-        padding: 15px; /* Increase padding for better touch experience */
+
+    .cart-items {
+        padding: 10px; /* Adjust padding for better mobile readability */
+    }
+
+    .cart-item, .cart-summary {
+        padding: 15px; /* Adjust padding for items and summary */
+    }
+
+    .cart-summary button.checkout-button {
+        padding: 10px 20px; /* Adjust button padding for mobile */
     }
 }
 
 @media (max-width: 480px) {
-    .index-main {
-        width: 95%;
+    .cart-container {
         padding: 10px;
     }
 
-    footer {
-        padding: 20px; /* Increase padding for smaller screens */
+    .cart-items {
+        padding: 5px; /* Reduce padding for very small screens */
     }
-}
 
-/* Ensure text hyphenation and proper wrapping */
-.text-container {
-    -webkit-hyphens: auto !important;
-    hyphens: auto !important;
-    word-wrap: break-word !important;
-    overflow-wrap: anywhere !important;
+    .cart-item, .cart-summary {
+        padding: 10px; /* Adjust padding for items and summary */
+    }
+
+    .cart-summary button.checkout-button {
+        padding: 8px 16px; /* Adjust button padding for very small screens */
+    }
 }

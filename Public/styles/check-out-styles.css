@@ -1,0 +1,77 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    background-image: url('../Images/background.jpg'); /* Adjust path relative to your CSS file */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+}
+
+.checkout-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.checkout-main p {
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for visibility */
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px; /* Limit the width to make it look better on large screens */
+}
+
+/* Footer styles */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+    width: 100%;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .center-text h1 {
+        font-size: 20px;
+    }
+
+    .checkout-main p {
+        font-size: 16px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .center-text h1 {
+        font-size: 18px;
+    }
+
+    .checkout-main p {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

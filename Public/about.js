@@ -11,12 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to create navigation buttons
     function createNavigationButtons() {
-        // Logic based on your specific requirements for navigation buttons
-        const buttonContainer = document.getElementById('buttonContainer');
+        // Create and append buttons
         createButton('Home', 'home.html');
         createButton('Products', 'products.html'); 
         createButton('Contact', 'contact.html');
-        createButton('Shopping Cart', 'shopping-cart.html');
+        createShoppingCartButton('Shopping Cart', 'shopping-cart.html');
     }
 
     // Function to create a button element
@@ -30,22 +29,35 @@ document.addEventListener('DOMContentLoaded', function() {
         buttonContainer.appendChild(button);
     }
 
-    // Function to create a link element (if needed for other purposes)
-    function createNavLink(text, url) {
-        const link = document.createElement('a');
-        link.classList.add('common-link');
-        link.textContent = text;
-        link.href = url;
-        buttonContainer.appendChild(link);
+    // Function to create a shopping cart button with cart count
+    function createShoppingCartButton(text, url) {
+        const button = document.createElement('button');
+        button.classList.add('common-button');
+        button.textContent = text;
+
+        // Create cart count span
+        const cartCount = document.createElement('span');
+        cartCount.className = 'cart-count'; // Ensure this class matches your CSS
+        button.appendChild(cartCount);
+
+        button.addEventListener('click', function() {
+            window.location.href = url;
+        });
+        buttonContainer.appendChild(button);
+
+        // Update cart count after appending the button
+        updateCartCount();
     }
-     // Function to check for saved cart items
-     function checkForSavedCart() {
+
+    // Function to check for saved cart items
+    function checkForSavedCart() {
         const savedCart = sessionStorage.getItem('shoppingCart');
         if (savedCart) {
             shoppingCart = JSON.parse(savedCart);
             updateCartCount(); // Update cart count displayed in the header
         }
     }
+
     function updateCartCount() {
         const cartCountElement = document.querySelector('.cart-count');
         if (cartCountElement) {
@@ -60,5 +72,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
     checkForSavedCart();
 });
-
-

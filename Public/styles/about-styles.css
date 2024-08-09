@@ -12,28 +12,41 @@ html, body {
     line-height: 1.6;
     display: flex;
     flex-direction: column;
-    background-image: url('../Images/background.jpg'); /* Adjust path relative to your CSS file */
+    background-image: url('../Images/background.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    overflow-x: hidden;
 }
 
-/* Styles for the main content */
+
 main {
     flex: 1;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+}
+
+/* Styles for the container */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    width: 100%; /* Ensure it takes full width available */
+    max-width: 800px; /* Adjust as needed */
     padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    border-radius: 8px;
+    box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
 /* Styles for the section containing content */
 section {
-    max-width: 800px; /* Adjust as needed */
+    width: 100%; /* Ensure it takes full width available */
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.8); /* Optional: Add a semi-transparent background */
-    padding: 20px;
-    border-radius: 8px;
+    overflow: visible; 
 }
 
 /* Footer Styles */
@@ -42,18 +55,29 @@ footer {
     color: #fff;
     text-align: center;
     padding: 10px;
-    margin-top: auto;
-    flex-shrink: 0;
+    margin-top: auto; /* Ensure footer stays at the bottom */
+    flex-shrink: 0; /* Prevent footer from shrinking */
+    width: 100%; /* Ensure it takes full width */
 }
 
 /* Mobile Styles */
 @media (max-width: 768px) {
-    .index-main {
-        width: 90%;
+    main {
         padding: 15px;
-        margin-top: 0; /* Consider removing top positioning if it causes issues */
-        top: 0; /* Reset top positioning for mobile view */
+        align-items: center;
     }
+    
+    .container {
+        padding: 10px;
+        max-width: 100%; /* Ensure it doesn't exceed the viewport width */
+        margin-bottom: 0px;
+    }
+
+
+    section {
+        padding: 15px; /* Adjust padding for better mobile readability */
+        font-size: 16px; /* Adjust font size for better readability */
+    }   
     
     footer {
         padding: 15px; /* Increase padding for better touch experience */
@@ -61,13 +85,22 @@ footer {
 }
 
 @media (max-width: 480px) {
-    .index-main {
-        width: 95%;
+    main {
+        padding: 10px;
+    }
+    .container {
         padding: 10px;
     }
 
+
+    section {
+        padding: 10px; /* Reduce padding for very small screens */
+        font-size: 14px; /* Further adjust font size */
+        margin-bottom: 5px;
+    }
+
     footer {
-        padding: 20px; /* Increase padding for smaller screens */
+        padding: 10px; /* Increase padding for smaller screens */
     }
 }
 
