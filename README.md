@@ -27,6 +27,7 @@ npm install mongoose
 (Referenced up above also) To start node server use command node server.js in the terminal/console once all the dependents are installed to get started.
 
 Future features 
+
 Contact form in the contacts page that can be filled out.  Then it will be sent to a ticket sytem or emailed out.
 Payment Processing on the Checkout Page.
 
